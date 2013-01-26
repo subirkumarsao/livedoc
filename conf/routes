@@ -1,0 +1,24 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                                       Application.index
+GET     /login                                  Application.login
+POST    /upload                                 Application.upload
+POST    /update/{docId}/{docVersion}            Application.update
+GET		/update/{docId}/{docVersion}			Application.isUpdateRequired
+GET		/download/{docId}/{type}				Application.download
+GET		/oauth/facebook							Facebook.auth
+
+GET		/auth 									Dropbox.auth
+GET		/dropboxAuth 							Dropbox.apptoken
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/                                staticDir:public
+
+# Catch all
+*       /{controller}/{action}                  {controller}.{action}

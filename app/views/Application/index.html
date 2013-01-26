@@ -1,0 +1,17 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<html>
+	<head>
+	</head>
+	<body>
+		<form action="upload" method="POST" enctype="multipart/form-data">
+			<input type="file" name="file"/>
+			<input type="submit">
+		</form>
+		
+		#{list items:user.documents, as:'document'}
+			${document.name}
+		#{/list}
+	</body>
+</html>
