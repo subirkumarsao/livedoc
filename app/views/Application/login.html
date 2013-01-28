@@ -1,12 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>LiveDocs</title>
-</head>
-<body>
-	<a href="https://www.facebook.com/dialog/oauth?client_id=${play.configuration['facebook_clientId']}&redirect_uri=&{play.configuration['facebook_redirectUrl']}">Facebook</a>
-	<a href="">Google</a>
-	<a href="">Twitter</a>
-</body>
-</html>
+#{extends 'main.html' /}
+#{set title:'Livedoc - Login' /}
+	
+<div class="container" >
+	<div class="hero-unit">
+		<p>
+		<h3>Login to your account using any of the applications below,</h3>
+		<a class="btn btn-primary btn-large" href="https://www.facebook.com/dialog/oauth?client_id=${play.configuration['facebook_clientId']}&redirect_uri=&{play.configuration['facebook_redirectUrl']}">Facebook</a>
+		<a class="btn btn-primary btn-large" href="">Google</a>
+		<a class="btn btn-primary btn-large" href="">Twitter</a>
+		</p>	
+	</div>
+</div>

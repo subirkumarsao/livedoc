@@ -20,6 +20,8 @@ import org.docx4j.openpackaging.parts.WordprocessingML.VbaDataPart;
 import org.docx4j.openpackaging.parts.WordprocessingML.VbaProjectBinaryPart;
 import org.docx4j.utils.ResourceUtils;
 
+import com.lowagie.text.Header;
+
 import play.libs.Crypto;
 import play.libs.WS;
 import play.libs.WS.HttpResponse;
@@ -45,7 +47,19 @@ public class Application extends Controller {
     			&& session.get("dropbox_token")==null){
     		Dropbox.auth();
     	}*/
-        render(user);
+        home();
+    }
+    
+    public static void home() throws Exception {
+    	
+    	String userId = session.get("userId");
+    	
+    	if(userId==null){
+    		login();
+    	}
+    	Long id = Long.parseLong(userId);
+    	User user = User.findById(id);
+    	render(user);
     }
     
     public static void login() throws Exception {
@@ -74,7 +88,7 @@ public class Application extends Controller {
     	Long id = Long.parseLong(Crypto.decryptAES(docId));
     	Document document =  Document.findById(id);
     	
-    	if(type!=null && type=="pvt"){
+    	if(type!=null && type.equals("pvt")){
     		type="Private";
     	}
     	else{
@@ -83,6 +97,7 @@ public class Application extends Controller {
     	
     	String url = Dropbox.client.sign(getCredential(), "https://api-content.dropbox.com/1/files" +
     			"/dropbox/APP/"+type+"/"+document.id+".docm");
+    	response.setHeader("Content-disposition", "attachment; filename="+document.name);
     	redirect(url);
     }
     public static void main(String[] args) {
@@ -145,24 +160,27 @@ public class Application extends Controller {
     	ICredentials creds = getCredential();
     	
     	File prvtFile = createPrivateDocument(file,document.id,(long)document.version);
-    	
-    	WSRequest request = WS.url("https://api-content.dropbox.com/1/" +
-    			"files_put/dropbox/APP/Private/"+document.id+".docm");
-    	InputStream ios = new FileInputStream(prvtFile);
-    	request.body(ios); 
-    	HttpResponse response = Dropbox.client.sign(creds,request ,"POST").post();
-    	System.out.println("Response status="+response.getStatus());
-    	
+    	{
+	    	WSRequest request = WS.url("https://api-content.dropbox.com/1/" +
+	    			"files_put/dropbox/APP/Private/"+document.id+".docm");
+	    	InputStream ios = new FileInputStream(prvtFile);
+	    	request.body(ios); 
+	    	Dropbox.client.sign(creds,request ,"POST").post();
+	    	ios.close();
+	    	ios=null;
+    	}
     	prvtFile.delete();
     	
     	File pubFile = createPublicDocument(file,document.id,(long)document.version);
-    	
-    	request = WS.url("https://api-content.dropbox.com/1/" +
+    	{
+    		WSRequest request = WS.url("https://api-content.dropbox.com/1/" +
     			"files_put/dropbox/APP/Public/"+document.id+".docm");
-    	ios = new FileInputStream(pubFile);
-    	request.body(ios); 
-    	Dropbox.client.sign(creds,request ,"POST").post();
-    	
+    		InputStream ios = new FileInputStream(pubFile);
+    		request.body(ios); 
+    		Dropbox.client.sign(creds,request ,"POST").post();
+    		ios.close();
+	    	ios=null;
+    	}
     	pubFile.delete();
     	
     	String userId = session.get("userId");

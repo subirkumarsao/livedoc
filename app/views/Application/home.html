@@ -1,0 +1,39 @@
+#{extends 'main.html' /}
+#{set title:'Livedoc - Login' /}
+	
+<div class="container" >
+	<div class="hero-unit">
+		<h3>Welcome, <i>${user.name}</i></h3>
+		Start using Live Doc by uploading a Word 2007 document.
+		<a class="btn btn-info">Learn more &raquo;</a>
+		<br/><br/>
+		
+		<form action="@{Application.upload}" method="POST" enctype="multipart/form-data">
+			<input type="file" name="file"/>
+			<input type="submit">
+		</form>
+		
+	</div>
+	<div class="hero-unit">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Name</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+			#{list items:user.documents, as:'document'}
+				<tr>
+					<td>${document_index}</td>
+					<td>${document.name}</td>
+					<td><a href="@{Application.download(document.id.encrypt(),'pvt')}" download="${document.name.substring(0,document.name.length()-1)}m" target="_blank">Private</a></td>
+					<td><a href="@{Application.download(document.id.encrypt(),'pub')}" download="${document.name.substring(0,document.name.length()-1)}m" target="_blank">Public</a></td>
+				</tr>
+			#{/list}
+			</tbody>
+		</table>
+	</div>
+</div>

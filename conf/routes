@@ -4,6 +4,7 @@
 
 # Home page
 GET     /                                       Application.index
+GET     /home                                   Application.home
 GET     /login                                  Application.login
 POST    /upload                                 Application.upload
 POST    /update/{docId}/{docVersion}            Application.update
