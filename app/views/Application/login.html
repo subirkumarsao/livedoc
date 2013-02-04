@@ -6,7 +6,7 @@
 		<p>
 		<h3>Login to your account using any of the applications below,</h3>
 		<a class="btn btn-primary btn-large" href="https://www.facebook.com/dialog/oauth?client_id=${play.configuration['facebook_clientId']}&redirect_uri=&{play.configuration['facebook_redirectUrl']}">Facebook</a>
-		<a class="btn btn-primary btn-large" href="">Google</a>
+		<a class="btn btn-primary btn-large" href="https://accounts.google.com/o/oauth2/auth?redirect_uri=&{play.configuration['google_redirectUrl']}&response_type=code&client_id=${play.configuration['google_clientId']}&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile">Google</a>
 		<a class="btn btn-primary btn-large" href="">Twitter</a>
 		</p>	
 	</div>

@@ -19,7 +19,7 @@ public class Facebook extends Controller{
 	
 	public static final String graphUrl = "https://graph.facebook.com";
 	
-	public static void auth(String code) throws Exception {
+	public static void oauth(String code) throws Exception {
 		
 		WSRequest request =  WS.url(authUrl);
 		

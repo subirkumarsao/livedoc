@@ -10,7 +10,8 @@ POST    /upload                                 Application.upload
 POST    /update/{docId}/{docVersion}            Application.update
 GET		/update/{docId}/{docVersion}			Application.isUpdateRequired
 GET		/download/{docId}/{type}				Application.download
-GET		/oauth/facebook							Facebook.auth
+GET		/oauth/facebook							Facebook.oauth
+GET 	/oauth/google							Google.oauth
 
 GET		/auth 									Dropbox.auth
 GET		/dropboxAuth 							Dropbox.apptoken
