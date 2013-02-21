@@ -9,11 +9,14 @@
 		<br/><br/>
 		
 		<form action="@{Application.upload}" method="POST" enctype="multipart/form-data">
+		<div class="label label-important">${message}</div>
+		<br/>
 			<input type="file" name="file"/>
 			<input type="submit">
 		</form>
 		
 	</div>
+	#{if user.documents}
 	<div class="hero-unit">
 		<table class="table table-striped">
 			<thead>
@@ -36,4 +39,5 @@
 			</tbody>
 		</table>
 	</div>
+	#{/if}
 </div>

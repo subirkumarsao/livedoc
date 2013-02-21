@@ -34,6 +34,11 @@ public class Application extends Controller {
 	
 	public static Random random = new Random();
 	
+	public static void logout() throws Exception {
+		session.remove("userId");
+		index();
+	}
+	
     public static void index() throws Exception {
     	
     	String userId = session.get("userId");
@@ -47,10 +52,10 @@ public class Application extends Controller {
     			&& session.get("dropbox_token")==null){
     		Dropbox.auth();
     	}*/
-        home();
+        home(null);
     }
     
-    public static void home() throws Exception {
+    public static void home(String message) throws Exception {
     	
     	String userId = session.get("userId");
     	
@@ -59,7 +64,7 @@ public class Application extends Controller {
     	}
     	Long id = Long.parseLong(userId);
     	User user = User.findById(id);
-    	render(user);
+    	render(user,message);
     }
     
     public static void login() throws Exception {
@@ -151,6 +156,13 @@ public class Application extends Controller {
     }
 
     public static void upload(File file) throws Exception{
+    	
+    	if(file.length()>(2*1024*1024)){
+    		home("File length greater then 2 MB.");
+    	}
+    	if(!file.getName().split("\\.(?=[^\\.]+$)")[1].equalsIgnoreCase("docx")){
+    		home("Invalid file format. It should be Word 2007 docx file.");
+    	}
     	
     	Document document = new Document();
     	document.name = file.getName();

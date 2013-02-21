@@ -6,6 +6,7 @@
 GET     /                                       Application.index
 GET     /home                                   Application.home
 GET     /login                                  Application.login
+GET     /logout                                 Application.logout
 POST    /upload                                 Application.upload
 POST    /update/{docId}/{docVersion}            Application.update
 GET		/update/{docId}/{docVersion}			Application.isUpdateRequired

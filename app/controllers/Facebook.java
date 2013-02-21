@@ -51,6 +51,6 @@ public class Facebook extends Controller{
 		}else{
 			session.put("userId", users.get(0).id);
 		}
-		Application.home();
+		Application.home(null);
 	}
 }

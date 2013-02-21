@@ -31,10 +31,17 @@
 	          <a class="brand" href="#">Live Doc</a>
 	          <div class="nav-collapse collapse">
 	            <ul class="nav">
-	              <li class="active"><a href="#">Home</a></li>
+	              <li class="active"><a href="@{Application.home}">Home</a></li>
 	              <li><a href="#about">About</a></li>
 	              <li><a href="#contact">Contact</a></li>
 	            </ul>
+	            #{if user && user.name}
+	            <p class="navbar-text pull-right">
+	              Logged in as <a href="@{Application.home}" class="navbar-link">${user.name}</a>
+	              &nbsp;&nbsp;&nbsp;
+	              <a href="@{Application.logout}" class="navbar-link">Logout</a>
+	            </p>
+	            #{/if}
 	          </div><!--/.nav-collapse -->
 	        </div>
 	      </div>
