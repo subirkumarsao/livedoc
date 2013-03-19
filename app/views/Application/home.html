@@ -1,11 +1,12 @@
 #{extends 'main.html' /}
-#{set title:'Livedoc - Login' /}
-	
+#{set title:'Livedoc - Documents' /}
+#{set menu:'Home' /}
+
 <div class="container" >
 	<div class="hero-unit">
 		<h3>Welcome, <i>${user.name}</i></h3>
 		Start using Live Doc by uploading a Word 2007 document.
-		<a class="btn btn-info">Learn more &raquo;</a>
+		<a class="btn btn-info" href="@{Application.about}">Learn more &raquo;</a>
 		<br/><br/>
 		
 		<form action="@{Application.upload}" method="POST" enctype="multipart/form-data">

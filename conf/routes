@@ -5,6 +5,8 @@
 # Home page
 GET     /                                       Application.index
 GET     /home                                   Application.home
+GET     /about                                  Application.about
+GET     /contact                                Application.contact
 GET     /login                                  Application.login
 GET     /logout                                 Application.logout
 POST    /upload                                 Application.upload

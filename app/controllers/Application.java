@@ -39,6 +39,10 @@ public class Application extends Controller {
 		index();
 	}
 	
+	public static void about(){
+		render();
+	}
+	
     public static void index() throws Exception {
     	
     	String userId = session.get("userId");
@@ -251,5 +255,9 @@ public class Application extends Controller {
     	p.save(retFile);
     	return retFile;
     	
+    }
+    
+    public static void contact(){
+    	render();
     }
 }
