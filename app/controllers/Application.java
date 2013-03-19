@@ -20,8 +20,11 @@ import org.docx4j.openpackaging.parts.WordprocessingML.VbaDataPart;
 import org.docx4j.openpackaging.parts.WordprocessingML.VbaProjectBinaryPart;
 import org.docx4j.utils.ResourceUtils;
 
+import android.content.Context;
+
 import com.lowagie.text.Header;
 
+import play.Play;
 import play.libs.Crypto;
 import play.libs.WS;
 import play.libs.WS.HttpResponse;
@@ -29,6 +32,7 @@ import play.libs.WS.WSRequest;
 import play.modules.oauthclient.ICredentials;
 import play.mvc.Controller;
 import play.vfs.VirtualFile;
+import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
 
 public class Application extends Controller {
 	
@@ -250,8 +254,8 @@ public class Application extends Controller {
     	ctm.addOverrideContentType( new java.net.URI("/word/document.xml"), 
     	        ContentTypes.WORDPROCESSINGML_DOCUMENT_MACROENABLED);
     	
-    	VirtualFile vrf = VirtualFile.fromRelativePath("/app/temp/"+random.nextInt()+".docm");
-    	File retFile = vrf.getRealFile();
+    	File retFile = new File(Play.tmpDir.getAbsolutePath()+random.nextInt()+".docm");
+    	retFile.createNewFile();
     	p.save(retFile);
     	return retFile;
     	
