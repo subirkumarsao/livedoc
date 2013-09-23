@@ -1,5 +1,8 @@
 livedoc
 =======
+
+http://livedoc.lazybuds.com
+
 About:
 
 LiveDoc is a unique of sharing documents. When you share a LiveDoc with someone you can be assured that the other person will always have the updated version of the document. 
